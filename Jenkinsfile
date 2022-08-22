@@ -12,7 +12,7 @@ pipeline {
           agent any  // ce stage sera executer sur la même machine avec jenkins
           steps {
              script {
-               sh 'docker build -t  wachehi/$IMAGE_NAME:$IAMGE_TAG .' 
+               sh 'docker build -t  wachehi/$IMAGE_NAME:$IMAGE_TAG .' 
              }
          }
       }

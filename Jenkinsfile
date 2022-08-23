@@ -71,5 +71,28 @@ pipeline {
          }
    }
 
+      stage('Push image in production and deploy it'){ 
+     when {
+            expression { GIT_BRANCH == 'origin/master' }
+          }
+     agent any
+     environment {
+          HEROKU_API_KEY = credentials('heroku_api_key')   // credential creer à partir de jenkins
+     }                                                     // attention le token mis sur jenkins  a été généré sur heroku
+                                                          // puis utilisé par credential jenkins
+     steps {
+             script {  // ici on va se loguer sur heroku avec login , creer le projet si il n'existe pas , pusher et deployer l'application
+                       // le mot clé release permet de deployer un container sur l'environement PRODUCTION
+                       // attention heroku à son propre registry ce por cela qu'on a pousser sur dockerhub
+               sh '''
+                  heroku container:login
+                  heroku create $PRODUCTION || echo "project already exist"  
+                  heroku container:push -a $PRODUCTION web
+                  heroku container:release -a $PRODUCTION web
+               ''' 
+             }
+         }
+   }
+
    }
 }

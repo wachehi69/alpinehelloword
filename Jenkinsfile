@@ -32,7 +32,7 @@ pipeline {
           steps {
              script {
                sh '''
-                  curl http://192.168.56.110:8080 | grep -q "Hello world!"
+                  curl http://192.168.56.110 | grep -q "Hello world!"
                ''' 
              }
          }
@@ -48,7 +48,7 @@ pipeline {
              }
          }
    }
-   stage('Push image in stage and deploy it'){
+   stage('Push image in stage and deploy it'){ 
      when {
             expression { GIT_BRANCH == 'origin/master' }
           }

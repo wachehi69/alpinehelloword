@@ -60,7 +60,7 @@ pipeline {
      steps {
              script {  // ici on va se loguer sur heroku avec login , creer le projet si il n'existe pas , pusher et deployer avec
                        // le mot clé release sur l'environement STAGING
-                       // attention heroku à son propre registry ce por cela qu'on a pousser sur dockerhub
+                       // attention heroku à son propre registry ce pour cela qu'on a pousser sur dockerhub 
                sh '''
                   heroku container:login
                   heroku create $STAGING || echo "project already exist"  

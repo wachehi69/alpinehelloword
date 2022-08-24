@@ -6,10 +6,10 @@ pipeline {
      STAGING = "eazytraning-staging"  
      PRODUCTION = "eazytraning-production"
    }
-   agent none
+   agent none    // on precise pas un agent particulier
    stages {
     stage('Build image') {
-          agent any  // ce stage sera executer sur la même machine avec jenkins
+          agent any  // n'importe agent disponible ici ce stage sera executer sur la même machine avec jenkins
           steps {
              script {
                sh 'docker build -t  wachehi/$IMAGE_NAME:$IMAGE_TAG .' 
@@ -50,11 +50,11 @@ pipeline {
    }
    stage('Push image in stage and deploy it'){ 
      when {
-            expression { GIT_BRANCH == 'origin/master' }
+            expression { GIT_BRANCH == 'origin/master' }  // ce job n'execute que lorsque on est sur la master
           }
      agent any
-     environment {
-          HEROKU_API_KEY = credentials('heroku_api_key')   // credential creer à partir de jenkins
+     environment {                                          // variable locale et globale propre à ce stage
+          HEROKU_API_KEY = credentials('heroku_api_key')   // credential creer à partir de jenkins c'est à l'ID de mon secret
      }                                                     // attention le token mis sur jenkins  a été généré sur heroku
                                                           // puis utilisé par credential jenkins
      steps {

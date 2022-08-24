@@ -84,7 +84,7 @@ pipeline {
              script {  // ici on va se loguer sur heroku avec login , creer le projet si il n'existe pas , pusher et deployer l'application
                        // le mot clé release permet de deployer un container sur l'environement PRODUCTION
                       // attention heroku à son propre registry ce pour cela qu'on a poussé sur dockerhub
-                      // les 2 containers seront deployer dans heroku sur les 2 environements
+                      // les 2 containers seront deployer dans heroku sur les 2 environements Production et staging
                sh '''
                   heroku container:login
                   heroku create $PRODUCTION || echo "project already exist"  

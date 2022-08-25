@@ -96,8 +96,8 @@ pipeline {
    }
 
    }
-     
-     post {   // envoie notification sur slack lorsque le build jenkins est bien passé ou echoué.
+     // envoie notification sur slack lorsque le build jenkins est bien passé ou echoué.
+     post {   
         success {
           slackSend (color: '#00FF00', message: "SUCCESSFULL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
         }

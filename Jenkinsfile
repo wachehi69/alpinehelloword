@@ -100,7 +100,7 @@ pipeline {
      post {   
         always {
 		 script {
-		     slackNotififier currentBuild.result					
+		     slackNotifier currentBuild.result					
 		}			  
 	}
      }

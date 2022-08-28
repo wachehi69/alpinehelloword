@@ -99,11 +99,10 @@ pipeline {
      // envoie notification sur slack lorsque le build jenkins est bien passé ou echoué.
      post {   
         always {
-			    script {
-					      slackNotififier currentBuild.result					
-					}
-					  
-			 }
+		 script {
+		     slackNotififier currentBuild.result					
+		}			  
+	}
      }
   
 }
